@@ -1,7 +1,7 @@
-#downcase дополненный для русского языка
+#downcase РґРѕРїРѕР»РЅРµРЅРЅС‹Р№ РґР»СЏ СЂСѓСЃСЃРєРѕРіРѕ СЏР·С‹РєР°
 def downcase_r (arg)
-    alpha1 = (('А'..'Я').to_a )<<'Ё'
-    alpha2 = (('а'..'я').to_a )<<'ё'
+    alpha1 = (('Рђ'..'РЇ').to_a )<<'РЃ'
+    alpha2 = (('Р°'..'СЏ').to_a )<<'С‘'
     for i in 0..(arg.length-1) do
         #puts "i= #{i}"
         if  alpha1.index(arg[i])
@@ -11,31 +11,32 @@ def downcase_r (arg)
     #arg1 = arg.join('')
     arg.downcase
 end
-#функция палином
+#С„СѓРЅРєС†РёСЏ РїР°Р»РёРЅРѕРј
 def palinom?(arg1)
     if arg1 
       rez = false
-      arg2 = "" #здесь будет лежать "чистая" строка
-      arg1.each_char { |aa| arg2.concat(aa) if /["а-яА-Яa-zA-ZёЁ"]/ =~ aa } # каждую букву пишем в новую строку.
+      arg2 = "" #Р·РґРµСЃСЊ Р±СѓРґРµС‚ Р»РµР¶Р°С‚СЊ "С‡РёСЃС‚Р°СЏ" СЃС‚СЂРѕРєР°
+      arg1.each_char { |aa| arg2.concat(aa) if /["Р°-СЏРђ-РЇa-zA-ZС‘РЃ"]/ =~ aa } # РєР°Р¶РґСѓСЋ Р±СѓРєРІСѓ РїРёС€РµРј РІ РЅРѕРІСѓСЋ СЃС‚СЂРѕРєСѓ.
       arg2 = downcase_r(arg2)
-      puts "Чистая строка: #{arg2}"
+      puts "Р§РёСЃС‚Р°СЏ СЃС‚СЂРѕРєР°: #{arg2}"
       if arg2 == arg2.reverse && arg2 != ""
         rez = true
       end
     else
        rez = false
   end
-  rez #return убрала. 
+  rez #return СѓР±СЂР°Р»Р°. 
 end
-#куча примеров, в том числе и пустая строка
-a = "А роза упала на лапу азора?, ---------12324235346" #  "Азоза"
+#РєСѓС‡Р° РїСЂРёРјРµСЂРѕРІ, РІ С‚РѕРј С‡РёСЃР»Рµ Рё РїСѓСЃС‚Р°СЏ СЃС‚СЂРѕРєР°
+a = "Рђ СЂРѕР·Р° СѓРїР°Р»Р° РЅР° Р»Р°РїСѓ Р°Р·РѕСЂР°?, ---------12324235346" #  "РђР·РѕР·Р°"
 puts palinom?(a)
 b = nil
 puts palinom?(b)
 c = "DSDS     (ssD) s     d!"
 puts palinom?(c)
-d = "Ни разу не палином"
+d = "РќРё СЂР°Р·Сѓ РЅРµ РїР°Р»РёРЅРѕРј"
 puts palinom?(d)
-d = "АБЫар fdfff D        f--РАыба"
+d = "РђР‘Р«Р°СЂ fdfff D        f--Р РђС‹Р±Р°"
 puts palinom?(d)
 #STDIN.getc
+
