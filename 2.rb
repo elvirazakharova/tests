@@ -1,7 +1,7 @@
 def count_words(arg1)
-b = Hash.new(0)
-arg1.downcase.scan(/\w+/).each {|i| b[i] = b[i]+1 }
-return b
+    arg1.downcase.scan(/\w+/).inject(Hash.new{ 0 }){ |result, i| result[i] += 1
+    result
+}    
 end
 
 a = "A man, a plan,           a canal -- Panama"
