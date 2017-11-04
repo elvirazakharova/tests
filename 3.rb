@@ -9,16 +9,19 @@ NoSuchStrategyError;
 • в иных случаях необходимо вернуть имя и ход победителя, если оба игрока походили одинаково -
 выигрывает первый игрок.
 =end
+@h = { "R" => 1, "S" => 2, "P" => 3}
 puts "R - камень
 S - ножницы
 P - бумага"  
+
 def RSP (arg)
     begin      
-             puts "#{arg}"
-    raise "WrongNumberOfPlayersError" if arg.length != 2
-            h = { "R" => 1, "S" => 2, "P" => 3}
-            a = h[arg[0][1]]
-            b = h[arg[1][1]]
+            puts "#{arg}"
+            raise "нет длины" if arg == nil
+            raise "Не верно количество игроков" if arg.length != 2
+            raise "Не верны параметры" if (@h[arg[0][1]].nil?)||(@h[arg[1][1]].nil?) #в хэше нет таких значений
+            a = @h[arg[0][1]]
+            b = @h[arg[1][1]]
             if a == b 
                 puts "Одинаковые значения"
                 rez =  arg[0]
@@ -33,10 +36,11 @@ def RSP (arg)
                 end
             end
             return rez
-     rescue RuntimeError => error
-     puts error.inspect
-     rescue
-     puts "NoSuchStrategyError"
+     rescue Exception => e
+     puts e.message
+     #rescue RuntimeError => error
+     #puts "Шта"
+     #puts error.inspect     
      end
 end
 aa = nil
@@ -45,7 +49,7 @@ aa = [ ["Armando", "S"]]
 puts RSP(aa)
 aa = [ ["Armando", "S"], ["Dave", "S"], ["Dave", "S"] ]  
 puts RSP(aa)
-aa = [ ["Armando", "SS"], ["Dave", "P"] ] 
+aa = [ ["Armando", "S"], ["Dave", "A"] ] 
 puts RSP(aa)
 aa = [ ["Armando", "R"], ["Dave", "P"] ] 
 puts RSP(aa)
@@ -55,7 +59,7 @@ aa = [ ["Armando", "S"], ["Dave", "R"] ]
 puts RSP(aa)
 aa = [ ["Armando", "R"], ["Dave", "S"] ] 
 puts RSP(aa)
-=begin проще, понятнее, но длиннее
+=begin проще, понятнее, но длиньше
 def aaaaa (a, b)
     if (a-b).abs==1 
         if a-b<0
