@@ -14,9 +14,9 @@ class Object
     def dollar; self*RATES["dollar"]; end
     def euro; self*RATES["euros"]; end
     def ruble; self*RATES["ruble"]; end
-    def dollars; self.dollar; end
-    def euros; self.euro; end
-    def rubles; self.ruble; end
+    alias dollars dollar
+    alias rubles ruble
+    alias euros euro
     def in(x)
         self/RATES[x.to_s]
     end
