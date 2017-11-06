@@ -23,13 +23,15 @@ class Dessert
 end
 class JellyBean<Dessert
     def initialize(name, calories, flavor)
-        @name, @calories, @flavor =  name, calories, flavor
+        super(name, calories)
+         @flavor = flavor
     end 
     def to_s
       "(#@name, #@calories, #@flavor)"
     end
-    def flavor; @v; end
-    def flavor=(value); @flavor = value; end  
+    attr "flavor", true
+    #def flavor; @flavor; end
+    #def flavor=(value); @flavor = value; end  
     def delicious?
         @flavor != "black licorice" ? true : false
     end
@@ -40,12 +42,3 @@ end
 b = JellyBean.new("Мишкааа", 555, "black licorice")
 puts b
 puts b.delicious?
-=begin
-a = Dessert.new("Apple", 76)
-puts a.name
-a.calories = 45
-a.name = "Pinapple"
-puts a.class
-puts a.is_a? Dessert
-puts a
-=end
