@@ -17,7 +17,7 @@ class Dessert
     def healthy?
         calories <200 ? true : false
     end
-    def delicios?
+    def delicious?
         true
     end
 end
