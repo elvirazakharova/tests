@@ -1,42 +1,44 @@
-#downcase дополненный для русского языка
-def downcase_r (arg)
-    alpha1 = (('А'..'Я').to_a )<<'Ё'
-    alpha2 = (('а'..'я').to_a )<<'ё'
-    for i in 0..(arg.length-1) do
-        #puts "i= #{i}"
-        if  alpha1.index(arg[i])
-            arg[i] = alpha2[alpha1.index(arg[i])]
-        end
-    end
-    #arg1 = arg.join('')
-    arg.downcase
-end
-#функция палином
-def palinom?(arg1)
-    if arg1 
-      rez = false
-      arg2 = "" #здесь будет лежать "чистая" строка
-      arg1.each_char { |aa| arg2.concat(aa) if /["а-яА-Яa-zA-ZёЁ"]/ =~ aa } # каждую букву пишем в новую строку.
-      arg2 = downcase_r(arg2)
-      puts "Чистая строка: #{arg2}"
-      if arg2 == arg2.reverse && arg2 != ""
-        rez = true
-      end
-    else
-       rez = false
-  end
-  rez #return убрала. 
-end
-#куча примеров, в том числе и пустая строка
-a = "А роза упала на лапу азора?, ---------12324235346" #  "Азоза"
-puts palinom?(a)
-b = nil
-puts palinom?(b)
-c = "DSDS     (ssD) s     d!"
-puts palinom?(c)
-d = "Ни разу не палином"
-puts palinom?(d)
-d = "АБЫар fdfff D        f--РАыба"
-puts palinom?(d)
-#STDIN.getc
+STDOUT << 'Разработайте метод palindrome?(string), который будет определять, подана ли ему на вход строка
+string палиндром, т.е. строка, читающаяся одинаково с начала и с конца, при условии
+игнорирования пробелов, знаков препинания и регистра. Тесты для примеров и проверки:
+palindrome?("A man, a plan, a canal -- Panama") # => true
+palindrome?("Madam, I\'m Adam!") # => true
+palindrome?("Abracadabra") # => false (nil is also ok)
 
+
+'
+
+
+
+
+
+def downcase_UTF8(a)
+   a = (a.ord + 32).chr(Encoding::UTF_8) if ( (1040..1071).cover? a.ord) ||((65..90).cover? a.ord)
+   a
+end
+def palindrome?(arg)
+        if arg.nil?
+            puts "Чистая строка: nil"
+            return false
+        else
+            temp = ""
+            arg.each_char {|pp|  temp = temp+downcase_UTF8(pp) unless pp =~ /[^"а-яА-Яa-zA-ZёЁ"]/}
+            puts "Чистая строка: #{temp}"
+            temp == temp.reverse
+    end
+end
+
+
+
+
+#куча примеров, в том числе и пустая строка
+a = "А роза упала на лапу азора?, ---------12324235346"
+puts palindrome?(a)
+b = nil
+puts palindrome?(b)
+c = "DSDS     (ssD) s     d!"
+puts palindrome?(c)
+d = "Ни разу не палином"
+puts palindrome?(d)
+d = "АБЫар fdfff D        f--РАыба"
+puts palindrome?(d)
