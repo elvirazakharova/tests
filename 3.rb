@@ -13,34 +13,34 @@ NoSuchStrategyError;
 puts "R - камень
 S - ножницы
 P - бумага"  
-
+class NoSuchStrategyError<Exception
+end
+class WrongNumberOfPlayersError<Exception
+    def message ; "Не верно количество игроков"; end
+end
 def RSP (arg)
     begin      
             puts "#{arg}"
-            raise "нет длины" if arg == nil
-            raise "Не верно количество игроков" if arg.length != 2
-            raise "Не верны параметры" if (@h[arg[0][1]].nil?)||(@h[arg[1][1]].nil?) #в хэше нет таких значений
+            raise NoSuchStrategyError if arg == nil
+            raise WrongNumberOfPlayersError if arg.length != 2
+            raise NoSuchStrategyError if (@h[arg[0][1]].nil?)||(@h[arg[1][1]].nil?) #в хэше нет таких значений
             a = @h[arg[0][1]]
             b = @h[arg[1][1]]
             if a == b 
-                puts "Одинаковые значения"
                 rez =  arg[0]
             else
                 c = (a-b).abs #"расстояние"
                 if ( c == ((a-b)*(-1)**(c+1))) #лаконично и понятно в данном случае противоположные вещи
-                    puts "Второй выиграл"
                     rez = arg[1]
                 else
-                    puts "Первый выиграл"
                     rez = arg[0]
                 end
             end
             return rez
-     rescue Exception => e
+     rescue WrongNumberOfPlayersError => e
      puts e.message
-     #rescue RuntimeError => error
-     #puts "Шта"
-     #puts error.inspect     
+     rescue NoSuchStrategyError => e
+     puts e.message
      end
 end
 aa = nil
@@ -59,20 +59,3 @@ aa = [ ["Armando", "S"], ["Dave", "R"] ]
 puts RSP(aa)
 aa = [ ["Armando", "R"], ["Dave", "S"] ] 
 puts RSP(aa)
-=begin проще, понятнее, но длиньше
-def aaaaa (a, b)
-    if (a-b).abs==1 
-        if a-b<0
-            return a
-        else 
-            return b
-        end
-    else
-        if a-b<0
-            return b
-        else 
-            return a
-        end
-    end        
-end
-=end
