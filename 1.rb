@@ -7,31 +7,29 @@ palindrome?("Abracadabra") # => false (nil is also ok)
 
 
 '
-
-
-
-
-
-def downcase_UTF8(a)
-   a = (a.ord + 32).chr(Encoding::UTF_8) if ( (1040..1071).cover? a.ord) ||((65..90).cover? a.ord)
-   a
-end
-def palindrome?(arg)
-        if arg.nil?
-            puts "Чистая строка: nil"
-            return false
-        else
-            temp = ""
-            arg.each_char {|pp|  temp = temp+downcase_UTF8(pp) unless pp =~ /[^"а-яА-Яa-zA-ZёЁ"]/}
-            puts "Чистая строка: #{temp}"
-            temp == temp.reverse
+class String
+    def clear_downcase_UTF8
+       temp = ""
+       self.each_char do |a| 
+           case a.ord 
+           when (1040..1071), (65..90) #А-Я #A-Z
+                temp << (a.ord + 32).chr(Encoding::UTF_8) 
+           when 1025 #Ё
+                temp << 1105.chr(Encoding::UTF_8) 
+           when (1040+32..1071+32), (65+32..90+32),  1105
+               temp << a
+           end 
+        end
+        temp
     end
 end
+def palindrome?(arg)
+    arg ? arg.clear_downcase_UTF8 == arg.clear_downcase_UTF8.reverse : false
+end
 
 
 
-
-#куча примеров, в том числе и пустая строка
+puts palindrome?("Ёё")
 a = "А роза упала на лапу азора?, ---------12324235346"
 puts palindrome?(a)
 b = nil
