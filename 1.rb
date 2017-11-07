@@ -1,12 +1,3 @@
-STDOUT << 'Разработайте метод palindrome?(string), который будет определять, подана ли ему на вход строка
-string палиндром, т.е. строка, читающаяся одинаково с начала и с конца, при условии
-игнорирования пробелов, знаков препинания и регистра. Тесты для примеров и проверки:
-palindrome?("A man, a plan, a canal -- Panama") # => true
-palindrome?("Madam, I\'m Adam!") # => true
-palindrome?("Abracadabra") # => false (nil is also ok)
-
-
-'
 class String
     alias d downcase
     def downcase
@@ -26,13 +17,10 @@ class String
 end
 def palindrome?(arg)
         temp = ""
-        arg.downcase.each_char {|pp|  temp = temp+pp if pp =~ /["а-яА-Яa-zA-ZёЁ"]/} if arg
-        puts temp
+        arg.downcase.each_char {|pp|  temp << pp if pp =~ /["а-яА-Яa-zA-ZёЁ"]/} if arg
         arg ?  temp == temp.reverse   : false
     
 end
-
-
 
 puts palindrome?("Ёё")
 a = "А роза упала на лапу азора?, ---------12324235346"
@@ -41,7 +29,3 @@ b = nil
 puts palindrome?(b)
 c = "DSDS     (ssD) s     d!"
 puts palindrome?(c)
-d = "Ни разу не палином"
-puts palindrome?(d)
-d = "АБЫар fdfff D        f--РАыба"
-puts palindrome?(d)
