@@ -5,40 +5,24 @@ flavor. Измените метод delicious?, он должен возвращ
 '
 
 class Dessert
-    def initialize(name, calories)
-        @name, @calories = name, calories
-    end
-    def to_s
-      "(#@name, #@calories)"
-    end
-    def name; @name; end
-    def name=(value); @name = value; end    
-    def calories=(value); @calories = value; end
-    def healthy?
-        calories <200 ? true : false
-    end
-    def delicious?
-        true
-    end
+    def initialize(name = "", calories = 0); @name, @calories = name, calories;   end
+    attr_accessor :name, :calories
+    def healthy?; calories <200 ; end
+    def delicious? ; true ; end
 end
 class JellyBean<Dessert
     def initialize(name, calories, flavor)
         super(name, calories)
          @flavor = flavor
     end 
-    def to_s
-      "(#@name, #@calories, #@flavor)"
-    end
     attr "flavor", true
-    #def flavor; @flavor; end
-    #def flavor=(value); @flavor = value; end  
-    def delicious?
-        @flavor != "black licorice" ? true : false
-    end
+    def delicious?;  @flavor != "black licorice"  ; end
 end
 
 
 
-b = JellyBean.new("Мишкааа", 555, "black licorice")
-puts b
+b = JellyBean.new("Мишкааа", 20, "black licorice")
+puts b.inspect
 puts b.delicious?
+puts b.healthy?
+puts Dessert.new().delicious?
