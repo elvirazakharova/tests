@@ -9,8 +9,9 @@ STDOUT << 'Сделайте возможным выполнять следующ
 
 ' 
 
-RATES = {"euro" => 43.61, "euros" => 43.61, "dollar" =>32.26, "dollars"=>32.26, "ruble"=>1.0, "rubles"=>1.0}
-class Object
+
+module Denezhka
+    RATES = {"euro" => 43.61, "euros" => 43.61, "dollar" =>32.26, "dollars"=>32.26, "ruble"=>1.0, "rubles"=>1.0}
     def dollar; self*RATES["dollar"]; end
     def euro; self*RATES["euros"]; end
     def ruble; self*RATES["ruble"]; end
@@ -20,6 +21,9 @@ class Object
     def in(x)
         self/RATES[x.to_s]
     end
+end
+class Numeric
+    include Denezhka
 end
 puts 5.dollars
 puts 5.dollars.in(:euros)
