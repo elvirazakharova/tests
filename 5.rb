@@ -3,12 +3,8 @@ class Dessert
         @name, @calories = name, calories
     end
     attr_accessor :name, :calories
-    def healthy?
-        calories <200 ? true : false
-    end
-    def delicios?
-        true
-    end
+    def healthy?; calories <200; end
+    def delicios?; true; end
 end
 a = Dessert.new()
 b = Dessert.new("Apple", 76)
