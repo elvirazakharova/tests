@@ -20,13 +20,10 @@ class CartesianProduct
     def initialize(*arg) 
 		arg[0]&&arg[1] ? (@x, @y = arg[0], arg[1]) : (@x, @y = nil, nil)
 	end
-    def multiplication
-        temp = []
-        self.x.each {|xx| self.y.each { |yy|  temp<<[xx, yy] }}
-        temp
-    end
     def each
-        yield self.multiplication
+        temp = []
+        self.x.each {|xx| self.y.each {|yy| temp<<[xx, yy]}}
+        yield temp
     end
 end
 a = CartesianProduct.new()
