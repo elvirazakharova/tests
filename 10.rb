@@ -26,18 +26,15 @@ class CartesianProduct
         c = []
         temp = []
         temp = self.x.each {|xx| self.y.each { |yy| 
-                                                temp<<(["#{xx}", "#{yy}"]).dup
+                                                temp<<[xx, yy] #.dup
                                                 c = temp
                                                 #puts "temp = #{temp}"
                                                 }}
         c #после завершения работы each temp = 1,2 я не поняла почему.
-        #temp
+        
     end
     def each
         yield self.multiplication
-    end
-    def to_s
-        "#{x} #{y}"
     end
 end
 a = CartesianProduct.new()
