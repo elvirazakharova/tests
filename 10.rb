@@ -19,19 +19,12 @@ class CartesianProduct
     attr_accessor :x
     attr_accessor :y
     def initialize(*arg) 
-		arg[0] ? @x = arg[0] : @x = nil
-		arg[1] ? @y = arg[1] : @y = nil
+		arg[0]&&arg[1] ? (@x, @y = arg[0], arg[1]) : (@x, @y = nil, nil)
 	end
     def multiplication
-        c = []
         temp = []
-        temp = self.x.each {|xx| self.y.each { |yy| 
-                                                temp<<[xx, yy] #.dup
-                                                c = temp
-                                                #puts "temp = #{temp}"
-                                                }}
-        c #после завершения работы each temp = 1,2 я не поняла почему.
-        
+        self.x.each {|xx| self.y.each { |yy|  temp<<[xx, yy] }}
+        temp
     end
     def each
         yield self.multiplication
