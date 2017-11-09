@@ -16,8 +16,7 @@ ________________________________________________________________________________
 "
 
 class CartesianProduct
-    attr_accessor :x
-    attr_accessor :y
+    attr_accessor :x, :y
     def initialize(*arg) 
 		arg[0]&&arg[1] ? (@x, @y = arg[0], arg[1]) : (@x, @y = nil, nil)
 	end
