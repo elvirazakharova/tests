@@ -5,18 +5,26 @@ flavor. Измените метод delicious?, он должен возвращ
 '
 
 class Dessert
-    def initialize(name = "", calories = 0); @name, @calories = name, calories;   end
+    def initialize(name = "", calories = 0)
+        @name, @calories = name, calories
+    end
     attr_accessor :name, :calories
-    def healthy?; calories <200 ; end
-    def delicious? ; true ; end
+    def healthy?
+        calories <200
+    end
+    def delicious?
+        true 
+    end
 end
 class JellyBean<Dessert
     def initialize(name, calories, flavor)
         super(name, calories)
-         @flavor = flavor
+        @flavor = flavor
     end 
-    attr "flavor", true
-    def delicious?;  @flavor != "black licorice"  ; end
+    attr_accessor "flavor"
+    def delicious?
+        @flavor != "black licorice" 
+    end
 end
 
 
