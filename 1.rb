@@ -16,10 +16,7 @@ class String
     end
 end
 def palindrome?(arg)
-        temp = ""
-        arg.downcase.each_char {|pp|  temp << pp if pp =~ /["а-яА-Яa-zA-ZёЁ"]/} if arg
-        arg ?  temp == temp.reverse   : false
-    
+        arg ? arg.downcase.gsub(/[^"а-яА-Яa-zA-ZёЁ"]/, "") == arg.downcase.reverse.gsub(/[^"а-яА-Яa-zA-ZёЁ"]/, "") : false
 end
 
 puts palindrome?("Ёё")
