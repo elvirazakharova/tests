@@ -18,7 +18,8 @@ ________________________________________________________________________________
 class CartesianProduct
     attr_accessor :x, :y
     def initialize(*arg) 
-		arg[0]&&arg[1] ? (@x, @y = arg[0], arg[1]) : (@x, @y = nil, nil)
+		arg[0]? @x = arg[0] : @x = nil
+		arg[1]? @y = arg[1] : @y = nil
 	end
     def each
         self.x.each {|xx| self.y.each {|yy| yield [xx, yy]}}
