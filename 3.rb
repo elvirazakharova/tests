@@ -9,7 +9,7 @@ NoSuchStrategyError;
 • в иных случаях необходимо вернуть имя и ход победителя, если оба игрока походили одинаково -
 выигрывает первый игрок.
 =end
-@h = { "R" => 1, "S" => 2, "P" => 3}
+
 class NoSuchStrategyError<Exception
     def initialize(msg="No such strategy error") ;  super;  end
 end
@@ -17,22 +17,22 @@ class WrongNumberOfPlayersError<Exception
     def message ; "Не верно количество игроков"; end
 end
 def RSP (arg)
+    @h = { "R" => 1, "S" => 2, "P" => 3}
     begin      
             raise NoSuchStrategyError, "nil" if arg == nil 
             raise WrongNumberOfPlayersError if arg.length != 2
             raise NoSuchStrategyError if (@h[arg[0][1]].nil?)||(@h[arg[1][1]].nil?)
             a, b = @h[arg[0][1]], @h[arg[1][1]]
-            if a == b
-                arg[0]
-            else
-                (a-b).abs == ((a-b)*(-1)**((a-b).abs + 1)) ? arg[1] : arg[0]
-            end
+        if a == b || (a-b).abs != ((a-b)*(-1)**((a-b).abs + 1))
+            arg[0]
+        else
+            arg[1]
+        end
      rescue WrongNumberOfPlayersError => e
      puts e.message
      rescue NoSuchStrategyError => e
      puts e.message
      end
 end
-
 aa = [ ["Armando", "S"], ["Dave", "R"] ] 
-puts RSP(aa)
+puts "#{aa} Winner: #{RSP(aa)}"
