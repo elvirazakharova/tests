@@ -1,24 +1,26 @@
-def acom(a, b) #ищет, есть ли в формируемом блоке текущее слово из исходного
-    flag = false
-    a.each {|aa| flag = !flag if anagram(aa[0], b) }
-    flag 
-end
-
-def anagram(a, b) 
-  a&&b&&a.chars.sort.join == b.chars.sort.join #а все было куда проще...
-end
+=begin
+Анаграмма — литературный приём, состоящий в перестановке букв или звуков определённого
+слова (или словосочетания), что в результате даёт другое слово или словосочетание.
+Реализуйте метод combine_anagrams(words), который принимает на вход массив слов и разбивает их
+в группы по анаграммам, регистр букв не имеет значение при определении анаграмм. Тест для
+примера и проверки:
+# input: ['cars', 'for', 'potatoes', 'racs', 'four', 'scar', 'creams', 'scream']
+# output: [ ["cars", "racs", "scar"],
+# ["four"],
+# ["for"],
+# ["potatoes"],
+# ["creams", "scream"] ]
+=end
 
 def combine_anagrams (a)
-    temp = []
-    a.each do |aa| 
-                temp[temp.length] = a.select {|aaa|  anagram(aa, aaa) } unless acom(temp, aa)
-                temp.push()
-            end
-    temp
+    raise "nil" unless a 
+    a = a.group_by {|i|  i.downcase.chars.sort.join} 
+    a = a.values 
+    rescue Exception => e
+    puts e.message
 end
 
-a = ['cars', 'for', 'potatoes', 'racs', 'four', 'scar', 'creams', 'scream']
-a =  combine_anagrams(a)
-a.each { |bb| 
-            puts "#{bb}"
-    }
+
+a1 = ["frff", "s", "fffr", "ffrf", "rsss", "rsw", "rf", "frf", "ssss", "srw", "wrs", "rws"]
+a = ['Cars', 'for', 'potatoes', 'rAcs', 'four', 'scar', 'creams', 'scream']
+puts combine_anagrams(a).inspect
