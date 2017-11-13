@@ -1,7 +1,7 @@
 module Denezhka
-    RATES = {:euro => 43.61, :euros => 43.61,
-            :dollar =>32.26, :dollars =>32.26,
-            :ruble =>1.0, :rubles =>1.0}
+        RATES = {euro: 43.61, euros: 43.61,
+            dollar: 32.26, dollars: 32.26,
+            ruble: 1.0, rubles: 1.0}
     def dollar; self*RATES[:dollar]; end
     def euro; self*RATES[:euros]; end
     def ruble; self*RATES[:ruble]; end
