@@ -11,25 +11,31 @@ f.bar_history # => [nil, 3, :wowzo, 'boo!']
 
 "
 
-class Module
-    def attr_accessor_with_history(bar)
-         class_eval " 
-                        @@#{bar}_hystory = [nil] 
-                        def #{bar}; @#{bar}; end
-                        def #{bar}=(value)
-                            @#{bar} = value
-                            @@#{bar}_hystory << value
-                        end
-                        def #{bar}_hystory;  @@#{bar}_hystory; end
-                    "
+class Class
+  def attr_accessor_with_hystory(*methods)
+    methods.each do |method|
+      raise TypeError.new("method name  is not symbol") unless method.is_a?(Symbol)
+      define_method("initialize") do
+         instance_variable_set("@#{method}_hystory", [nil])
+      end
+      define_method(method) do
+        instance_variable_get("@#{method}")
+      end
+      define_method("#{method}=") do |v|
+        instance_variable_set("@#{method}", v)
+        instance_variable_set("@#{method}_hystory", instance_variable_get("@#{method}_hystory") << v)
+      end
+      define_method("#{method}_hystory") do
+        instance_variable_get("@#{method}_hystory")
+      end      
     end
+  end
 end
-class Foo       
-    attr_accessor_with_history :bar
+class Foo
+    attr_accessor_with_hystory :bar
 end
-
 f = Foo.new
-f.bar = 3
+f.bar = 1
 f.bar = :wowzo
-f.bar = 'boo!'
-puts "#{f.bar_hystory}"
+f.bar = "boo!"
+puts f.bar_hystory
