@@ -1,0 +1,15 @@
+#Почему разный вывод. В книге написано, что так и должно быть, но почему?
+def a
+  return 1 
+  ensure 
+  2
+  puts "aaaa" end
+end
+
+def b
+  return 1
+  2
+  puts "aaa"
+end
+a
+b
